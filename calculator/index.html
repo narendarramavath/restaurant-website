@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Simple Calculator</title>
+<style>
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.calculator {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calculator input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.calculator button {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  font-size: 16px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+.calculator button.operator {
+  background-color: #f0f0f0;
+}
+
+.calculator button.equals {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.calculator button.clear {
+  background-color: #f44336;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" id="result" value="" readonly>
+  <br>
+  <button onclick="addInput('7')">7</button>
+  <button onclick="addInput('8')">8</button>
+  <button onclick="addInput('9')">9</button>
+  <button onclick="addInput('+')" class="operator">+</button>
+  <br>
+  <button onclick="addInput('4')">4</button>
+  <button onclick="addInput('5')">5</button>
+  <button onclick="addInput('6')">6</button>
+  <button onclick="addInput('-')" class="operator">-</button>
+  <br>
+  <button onclick="addInput('1')">1</button>
+  <button onclick="addInput('2')">2</button>
+  <button onclick="addInput('3')">3</button>
+  <button onclick="addInput('*')" class="operator">*</button>
+  <br>
+  <button onclick="addInput('0')">0</button>
+  <button onclick="addInput('.')">.</button>
+  <button onclick="doCalculation()" class="equals">=</button>
+  <button onclick="addInput('/')" class="operator">/</button>
+  <br>
+  <button onclick="eraseAll()" class="clear">C</button>
+</div>
+
+<script>
+function addInput(value) {
+  document.getElementById('result').value += value;
+}
+
+function eraseAll() {
+  document.getElementById('result').value = "";
+}
+
+function doCalculation() {
+  let expression = document.getElementById('result').value;
+  try {
+    let answer = eval(expression);
+    document.getElementById('result').value = answer;
+  } catch (err) {
+    document.getElementById('result').value = "Error";
+  }
+}
+</script>
+
+</body>
+</html>
