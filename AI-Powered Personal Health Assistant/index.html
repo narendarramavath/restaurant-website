@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Personal Health Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4caf50;
+            font-size: 2.5em;
+        }
+        .input-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .input-container input {
+            width: 70%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        .input-container input:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+        .input-container button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+        .health-status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .health-status p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .health-status pre {
+            background-color: #e9f5e1;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #c8e6c9;
+            font-family: 'Roboto', sans-serif; /* Updated font */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 10px;
+            font-size: 1.1em; /* Slightly larger font size for better readability */
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1em;
+            color: #777;
+        }
+        footer a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI-Powered Personal Health Assistant</h1>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Enter health condition (e.g., Diabetes, Cold, Fever)" />
+        <button onclick="generateHealthAdvice()">Get Health Advice</button>
+    </div>
+
+    <div class="health-status" id="healthStatus">
+        <p>Ask me about your health, and I'll provide insights based on your data.</p>
+    </div>
+</div>
+
+<footer>
+    <p>Contact me at: <strong>8328658969</strong> or <a href="mailto:narendareduc@gmail.com">narendareduc@gmail.com</a></p>
+</footer>
+
+<script>
+    const healthAdviceData = {
+        "abdominal aortic aneurysm": "Abdominal aortic aneurysm is a bulging in the aorta, usually caused by high blood pressure or atherosclerosis. If it ruptures, it can cause life-threatening bleeding. Symptoms may include pain in the abdomen or lower back. Treatment may include surgery or medication to control blood pressure.",
+        "achilles tendinopathy": "Achilles tendinopathy is an injury to the tendon that connects the calf muscle to the heel. It is often caused by repetitive stress from activities like running. Treatment includes rest, ice, stretching, and strengthening exercises. In some cases, physical therapy or surgery may be required.",
+        "acne": "Acne is a common skin condition that causes pimples, blackheads, and cysts. It often occurs during adolescence due to hormonal changes. Treatment options include topical treatments, oral medications, and lifestyle changes like a healthy diet and regular skin care.",
+        "acute cholecystitis": "Acute cholecystitis is the inflammation of the gallbladder, usually caused by gallstones. Symptoms include severe abdominal pain, nausea, and fever. Immediate medical attention is needed, and treatment may include antibiotics, pain relief, and surgery to remove the gallbladder.",
+        "acute lymphoblastic leukaemia": "Acute lymphoblastic leukaemia (ALL) is a type of cancer that affects white blood cells. It is most common in children. Treatment often includes chemotherapy, and in some cases, stem cell transplants. Early detection improves survival rates.",
+        "addison’s disease": "Addison's disease is a condition where the adrenal glands do not produce enough hormones, particularly cortisol. Symptoms include fatigue, muscle weakness, and weight loss. It is treated with hormone replacement therapy to restore normal levels of cortisol and aldosterone.",
+        "adenomyosis": "Adenomyosis is a condition where the tissue that normally lines the uterus grows into the muscular wall of the uterus. It can cause heavy periods, pelvic pain, and discomfort during intercourse. Treatment options include hormonal therapy or, in severe cases, hysterectomy.",
+        "alcohol-related liver disease": "Alcohol-related liver disease is caused by excessive alcohol consumption over time, leading to liver inflammation, cirrhosis, and liver failure. Reducing alcohol intake or abstaining altogether is crucial in managing the disease. In severe cases, a liver transplant may be necessary.",
+        "allergic rhinitis": "Allergic rhinitis, commonly known as hay fever, is an allergic reaction to airborne substances like pollen, dust, or animal dander. Symptoms include sneezing, a runny nose, and itchy eyes. Treatment includes antihistamines, nasal sprays, and avoiding allergens.",
+        "alzheimer’s disease": "Alzheimer's disease is a progressive neurological disorder that causes memory loss, confusion, and changes in behavior. While there is no cure, medications can help manage symptoms and slow the progression. Early diagnosis is key to managing the disease.",
+        
+        // Adding cold and fever with general advice:
+        "cold": "A cold is a viral infection of the upper respiratory tract. Symptoms include a runny nose, sore throat, coughing, sneezing, and mild fatigue. There is no cure for the common cold, but treatments like rest, staying hydrated, and over-the-counter medications can help manage symptoms.",
+        "fever": "Fever is a temporary increase in body temperature, often due to an infection. Symptoms include sweating, chills, and body aches. Treatment includes rest, fluids, and fever-reducing medications like acetaminophen or ibuprofen. If the fever persists or is extremely high, consult a healthcare provider.",
+        
+        // Additional basic diseases and conditions:
+        "headache": "A headache is a common condition that causes pain or discomfort in the head, scalp, or neck. It may be caused by stress, dehydration, or illness. Treatment includes rest, hydration, pain relievers, and avoiding triggers.",
+        "insomnia": "Insomnia is a sleep disorder where a person has difficulty falling or staying asleep. It can be caused by stress, anxiety, or medical conditions. Treatment includes improving sleep hygiene, cognitive-behavioral therapy, and sometimes medication.",
+        "irritable bowel syndrome (IBS)": "Irritable bowel syndrome is a digestive disorder characterized by symptoms like bloating, diarrhea, and constipation. It is often triggered by stress or certain foods. Treatment includes dietary changes, stress management, and medications to relieve symptoms.",
+        "muscle strain": "A muscle strain occurs when a muscle is overstretched or torn. Symptoms include pain, swelling, and limited range of motion. Treatment typically includes rest, ice, compression, and elevation (R.I.C.E.), along with pain relievers.",
+        "common cold": "The common cold is a viral infection that affects the nose and throat. Symptoms include sneezing, coughing, sore throat, and mild body aches. Treatment focuses on symptom relief with rest, fluids, and over-the-counter medications.",
+        "flu": "The flu (influenza) is a contagious respiratory illness caused by a virus. Symptoms include fever, chills, sore throat, body aches, and fatigue. Vaccination can prevent the flu. Treatment includes rest, fluids, and antiviral medications in some cases.",
+        "stomach flu": "Stomach flu (gastroenteritis) is an infection of the stomach and intestines caused by viruses or bacteria. Symptoms include vomiting, diarrhea, and stomach cramps. Treatment includes staying hydrated and avoiding solid foods until symptoms subside.",
+        "high blood pressure": "High blood pressure (hypertension) occurs when the force of the blood against the walls of the arteries is consistently too high. It can be managed with medication, a low-salt diet, regular exercise, and stress management.",
+        "diabetes": "Diabetes is a chronic condition that affects how the body processes blood sugar (glucose). Type 1 diabetes is typically diagnosed in children and requires insulin therapy, while type 2 diabetes is more common in adults and can often be managed through lifestyle changes and medication.",
+        "arthritis": "Arthritis is a group of conditions that cause inflammation of the joints, leading to pain, swelling, and stiffness. Common types include osteoarthritis and rheumatoid arthritis. Treatment includes medications, physical therapy, and sometimes surgery.",
+        "pneumonia": "Pneumonia is an infection of the lungs that causes symptoms such as coughing, chest pain, and difficulty breathing. It can be caused by bacteria, viruses, or fungi. Treatment depends on the cause and may include antibiotics, antiviral medications, and rest.",
+        "tonsillitis": "Tonsillitis is the inflammation of the tonsils, often caused by a viral or bacterial infection. Symptoms include a sore throat, difficulty swallowing, and fever. Treatment may include pain relievers, antibiotics (for bacterial infections), and rest.",
+        "gastroesophageal reflux disease (GERD)": "GERD is a digestive condition where stomach acid frequently flows back into the esophagus, causing heartburn and irritation. Treatment includes antacids, proton pump inhibitors, and lifestyle changes like avoiding trigger foods.",
+        "eczema": "Eczema is a condition that causes itchy, inflamed skin. It is often triggered by allergies, irritants, or stress. Treatment includes moisturizing the skin, using topical steroids, and avoiding triggers.",
+        "cough": "A cough is a reflex action to clear the airways of mucus or foreign particles. It may be caused by a viral infection, allergies, or irritation. Treatment includes rest, fluids, and over-the-counter medications to relieve symptoms.",
+        "back pain": "Back pain is a common condition that can be caused by muscle strain, injury, or medical conditions like arthritis. Treatment includes rest, physical therapy, pain relievers, and sometimes surgical intervention if the pain is severe or persistent.",
+        "cold sores": "Cold sores are small blisters that appear around the lips, caused by the herpes simplex virus. They are contagious. Treatment includes antiviral medications to reduce symptoms and speed healing. Avoid touching the sores to prevent spreading.",
+        "high cholesterol": "High cholesterol is a condition where there is an excess of cholesterol in the blood, increasing the risk of heart disease. Treatment includes dietary changes, regular exercise, and medications like statins.",
+        
+        // Add more conditions as needed
+    };
+
+    function generateHealthAdvice() {
+        const userInput = document.getElementById('userInput').value.toLowerCase().trim();
+        let healthAdvice = "";
+
+        if (userInput === "") {
+            healthAdvice = "Please enter a health condition (e.g., 'Diabetes', 'Cold', 'Fever') to get personalized advice.";
+        } else if (healthAdviceData[userInput]) {
+            healthAdvice = healthAdviceData[userInput];
+        } else {
+            healthAdvice = "Sorry, I couldn't find any information on this condition. Please try another or be more specific.";
+        }
+
+        document.getElementById('healthStatus').innerHTML = `
+            <p>Health Advice:</p>
+            <pre>${healthAdvice}</pre>
+        `;
+    }
+</script>
+
+</body>
+</html>
