@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ramavath Narendar | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f1a;
+      color: #cfd8ff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0f0f1a;
+      padding: 10px 20px;
+      z-index: 10;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #8a2be2;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 100px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .circle-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .ai-brain {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #00f0ff88 10%, #0f0f1a 80%);
+      box-shadow: 0 0 50px #00f0ffaa, 0 0 100px #00f0ff66;
+      animation: pulse 3s infinite;
+    }
+
+    .name-title {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .name-title h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #00f0ff, #8a2be2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 6px #00f0ff55;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 20px #00f0ff55; }
+      50% { box-shadow: 0 0 60px #00f0ffaa, 0 0 100px #00f0ff66; }
+      100% { box-shadow: 0 0 20px #00f0ff55; }
+    }
+
+    section {
+      padding: 60px 20px 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 60px;
+      border-bottom: 2px solid #00f0ff;
+      display: inline-block;
+      background: linear-gradient(90deg, #00f0ff, #8a2be2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 6px #00f0ff55;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #00f0ff33;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px #00f0ff22;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    .project img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    footer a {
+      color: #00f0ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00f0ff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #8a2be2;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: #00f0ff;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: #8a2be2;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="circuit"></canvas>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#internships">Internships</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="circle-wrapper">
+    <div class="ai-brain"></div>
+    <div class="name-title">
+      <h1>Ramavath Narendar</h1>
+      <div class="tagline">Frontend Developer</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I’m Ramavath Narendar, a frontend developer with a passion for creativity and clean code. I specialize in building interactive user experiences with an AI-inspired design approach.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="box">HTML, CSS, JavaScript</div>
+  <div class="box">React, Tailwind CSS</div>
+  <div class="box">C++, DSA (Learning)</div>
+  <div class="box">Creative UI Design, AI Concepts</div>
+</section>
+
+<section id="internships">
+  <h2>Internships</h2>
+  <div class="box">
+    <strong>Python Developer – Pinnacle Labs</strong><br/>
+    Worked on backend scripts, data handling, and automation with Python. Developed a chatbot for automation and improved data workflows.
+  </div>
+  <div class="box">
+    <strong>Android Developer (Virtual) – Eduskills</strong><br/>
+    Developed Android app UIs and explored Java-based app logic. Created a full-featured app that allows users to track learning progress.
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="box project">
+    <strong>Tic Tac Toe Game</strong><br/>
+    A simple and responsive Tic Tac Toe game built using HTML, CSS, and JavaScript.
+  </div>
+  <div class="box project">
+    <strong>AI Health Advice</strong><br/>
+    AI-driven assistant for basic health recommendations.
+  </div>
+  <div class="box project">
+    <strong>E-commerce Site</strong><br/>
+    A responsive shopping website with dynamic cart and auth features.
+  </div>
+  <div class="box project">
+    <strong>Restaurant Website</strong><br/>
+    Clean menu design with interactive features and mobile optimization.
+  </div>
+  <div class="box project">
+    <strong>Portfolio Website</strong><br/>
+    A responsive portfolio showcasing projects and experience.
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:narendareduc@gmail.com">narendareduc@gmail.com</a></p>
+  <p>Phone: <a href="tel:+918328658969">8328658969</a></p>
+  <p>GitHub: <a href="https://github.com/narendarramavath" target="_blank">github.com/narendarramavath</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/narendar-ramavath" target="_blank">linkedin.com/in/narendar-ramavath</a></p>
+</section>
+
+<section id="social">
+  <h2>Follow Me</h2>
+  <div class="social-links">
+    <a href="https://github.com/narendarramavath" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/narendar-ramavath" target="_blank"><i class="fab fa-linkedin"></i></a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Ramavath Narendar
+</footer>
+
+<script>
+  const canvas = document.getElementById('circuit');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const lines = [];
+  for (let i = 0; i < 100; i++) {
+    lines.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dx: (Math.random() - 0.5) * 2,
+      dy: (Math.random() - 0.5) * 2,
+      length: Math.random() * 50 + 50
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "#00f0ff";
+    ctx.lineWidth = 1.2;
+    ctx.globalAlpha = 0.6;
+
+    for (let line of lines) {
+      ctx.beginPath();
+      ctx.moveTo(line.x, line.y);
+      ctx.lineTo(line.x + line.length * line.dx, line.y + line.length * line.dy);
+      ctx.stroke();
+
+      line.x += line.dx;
+      line.y += line.dy;
+
+      if (line.x < 0 || line.x > canvas.width) line.dx *= -1;
+      if (line.y < 0 || line.y > canvas.height) line.dy *= -1;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
